@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+      crossorigin="anonymous"
+    />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+
+    <title>REGISTATION</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap");
+      h1 {
+        font-family: "Cormorant Unicase";
+        text-align: center;
+        color: rgb(111, 87, 75);
+        vertical-align: center;
+        text-align: center;
+      }
+      body {
+        background-image: url(https://i.ytimg.com/vi/R9mXtzn8meE/maxresdefault.jpg);
+        background-repeat: vertical;
+        background-size: 100% auto;
+        width: 100%;
+        height: 100%;
+      }
+      .btn {
+        background: #6b4126;
+        border: transparent;
+        color: white;
+        text-align: center;
+        align-items: center;
+        font-family: "Nunito";
+      }
+      .btn:hover {
+        background: rgb(167, 126, 106);
+        transition: 0.9s;
+        color: rgb(255, 255, 255);
+        border: transparent;
+      }
+      .btn.primary {
+        font-family: "Nunito";
+      }
+    </style>
+  </head>
+
+  <body>
+    <center>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <div class="card" style="width: 25rem">
+        <div class="card-body">
+          <form>
+            <div class="row-centered">
+              <label for="username">USERNAME</label>
+              <br />
+              <input type="text" id="Username" name="username" />
+            </div>
+
+            <div class="row-centered">
+              <label for="email">EMAIL:</label>
+              <br />
+              <input type="text" id="Email" name="email" />
+            </div>
+
+            <div class="row-centered">
+              <label for="password">PASSWORD</label>
+              <br />
+              <input type="password" id="Password" name="password" />
+            </div>
+
+            <div class="row-centered">
+              <label for="cpassword">CONFIRM PASSWORD</label>
+              <br />
+              <input type="password" id="Cpassword" name="cpassword" />
+            </div>
+            <hr />
+
+            <button type="button" class="btn btn-primary" id="Regbtn">
+              REGISTER
+            </button>
+          </form>
+        </div>
+      </div>
+    </center>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+      crossorigin="anonymous"
+    ></script>
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyDnSa7iBpz00w_okpzApS0y-jsDfH7-EL8",
+        authDomain: "crud2-5af9c.firebaseapp.com",
+        databaseURL: "https://crud2-5af9c-default-rtdb.firebaseio.com",
+        projectId: "crud2-5af9c",
+        storageBucket: "crud2-5af9c.appspot.com",
+        messagingSenderId: "605127338511",
+        appId: "1:605127338511:web:b7b3cf0285fcb5cb04517a",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+
+      import {
+        getDatabase,
+        ref,
+        set,
+        child,
+        update,
+        remove,
+        get,
+      } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js";
+
+      const db = getDatabase();
+
+      // references
+
+      var username = document.getElementById("Username");
+      var email = document.getElementById("Email");
+      var password = document.getElementById("Password");
+      var cpassword = document.getElementById("Cpassword");
+
+      var regBtn = document.getElementById("Regbtn");
+
+      // add data function
+
+      function InsertData() {
+        set(ref(db, "STAMARIA_REGISTER/" + username.value), {
+          Username: username.value,
+          Email: email.value,
+          Password: password.value,
+          Cpassword: cpassword.value,
+        })
+          .then(() => {
+            alert("DATA STORED SUCCESSFULLY");
+          })
+          .catch((error) => {
+            alert("UNSUCCESSFUL, ERROR" + error);
+          });
+      }
+
+      regBtn.addEventListener("click", InsertData);
+    </script>
+  </body>
+</html>
